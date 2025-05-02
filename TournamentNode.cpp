@@ -24,7 +24,7 @@ void TournamentNode<T>::determineWinner() {
         return;
     }
     
-    if (leftMonster->compareScreamPower(*rightMonster)) {
+    if (leftMonster > rightMonster) {
         winner = leftMonster;
     } else {
         winner = rightMonster;

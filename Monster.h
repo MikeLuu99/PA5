@@ -8,13 +8,28 @@ class Monster {
   public:
     Monster(std::string name, T screamPowerLevel);
     ~Monster();
-    bool compareScreamPower(const Monster<T>& other) const;
+    //bool compareScreamPower(const Monster<T>& other) const;
     std::string getName() const { return name; }
     T getScreamPower() const { return screamPowerLevel; }
     
     // Made public for DOT file generation
     std::string name;
     T screamPowerLevel;
+
+    // Overload >
+    bool operator>(const Monster<T>& other) const{
+      return this->screamPowerLevel > other.screamPowerLevel;
+    }
+
+    // Overload <
+    bool operator<(const Monster<T>& other) const{
+      return this->screamPowerLevel < other.screamPowerLevel;
+    }
+
+    // Overload ==
+    bool operator==(const Monster<T>& other) const{
+      return this->screamPowerLevel == other.screamPowerLevel;
+    }
 };
 
 #endif
