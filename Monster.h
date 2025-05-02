@@ -11,7 +11,7 @@ class Monster {
     bool compareScreamPower(const Monster<T>& other) const;
     std::string getName() const { return name; }
     T getScreamPower() const { return screamPowerLevel; }
-    
+
     // Made public for DOT file generation
     std::string name;
     T screamPowerLevel;

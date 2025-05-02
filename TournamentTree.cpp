@@ -34,7 +34,14 @@ TournamentNode<T>* TournamentTree<T>::buildSingleEliminationRound(std::vector<Mo
   // Create matches for this round
   for (size_t i = 0; i < competitors.size(); i += 2) {
     Monster<T>* leftMonster = competitors[i];
-    Monster<T>* rightMonster = (i + 1 < competitors.size()) ? competitors[i + 1] : nullptr;
+
+    Monster<T>* rightMonster;
+
+    if (i + 1 < competitors.size()) {
+        rightMonster = competitors[i + 1];
+    } else {
+        rightMonster = nullptr;
+    }
 
     TournamentNode<T>* match = new TournamentNode<T>(leftMonster, rightMonster);
     nextRound.push_back(match->winner);
