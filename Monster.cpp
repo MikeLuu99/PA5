@@ -1,25 +1,25 @@
+/*
+* Full name: Mike Luu
+* Full name: Lance Nguyen
+* Student ID: 2451334
+* Chapman email: duluu@chapman.edu lannguyen@chapman.edu
+* Course: CPSC 350 - 04 CPSC 350 - 01
+* Assignment: Programming Assignment 5
+*/
+
 #include "Monster.h"
-#include <string>
 
-template <typename T>
-Monster<T>::Monster(std::string name, T screamPowerLevel) {
-  this->name = name;
-  this->screamPowerLevel = screamPowerLevel;
+Monster::Monster(std::string name, int power) : name(name), screamPowerLevel(power) {}
+
+// Compare monsters based on scream power
+bool Monster::operator>(const Monster& other) const {
+    return screamPowerLevel > other.screamPowerLevel;
 }
 
-template <typename T>
-Monster<T>::~Monster() {
+bool Monster::operator<(const Monster& other) const {
+    return screamPowerLevel < other.screamPowerLevel;
 }
 
-// template <typename T>
-// bool Monster<T>::compareScreamPower(const Monster<T>& other) const {
-//   return this->screamPowerLevel > other.screamPowerLevel;
-// }
-
-
-
-
-// Explicit template instantiation for common types
-template class Monster<int>;
-template class Monster<double>;
-template class Monster<float>;
+bool Monster::operator==(const Monster& other) const {
+    return name == other.name && screamPowerLevel == other.screamPowerLevel;
+}

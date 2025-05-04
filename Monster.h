@@ -1,35 +1,31 @@
+/*
+* Full name: Mike Luu
+* Full name: Lance Nguyen
+* Student ID: 2451334
+* Chapman email: duluu@chapman.edu lannguyen@chapman.edu
+* Course: CPSC 350 - 04 CPSC 350 - 01
+* Assignment: Programming Assignment 5
+*/
+
 #ifndef MONSTER_H
 #define MONSTER_H
 
 #include <string>
 
-template <typename T>
+// Monster class represents a competitor in the scare tournament
+// Each monster has a name and scream power level that determines their strength
 class Monster {
-  public:
-    Monster(std::string name, T screamPowerLevel);
-    ~Monster();
-    //bool compareScreamPower(const Monster<T>& other) const;
-    std::string getName() const { return name; }
-    T getScreamPower() const { return screamPowerLevel; }
-    
-    // Made public for DOT file generation
-    std::string name;
-    T screamPowerLevel;
+public:
+    std::string name;              // Monster's identifier/name
+    int screamPowerLevel;          // Monster's power level for competition
 
-    // Overload >
-    bool operator>(const Monster<T>& other) const{
-      return this->screamPowerLevel > other.screamPowerLevel;
-    }
+    // Constructor: Creates a monster with given name and power level
+    Monster(std::string name, int power);
 
-    // Overload <
-    bool operator<(const Monster<T>& other) const{
-      return this->screamPowerLevel < other.screamPowerLevel;
-    }
-
-    // Overload ==
-    bool operator==(const Monster<T>& other) const{
-      return this->screamPowerLevel == other.screamPowerLevel;
-    }
+    // Comparison operators to determine tournament winners based on scream power
+    bool operator>(const Monster& other) const;  // Returns true if this monster has higher power
+    bool operator<(const Monster& other) const;  // Returns true if this monster has lower power
+    bool operator==(const Monster& other) const; // Returns true if monsters are identical
 };
 
 #endif
