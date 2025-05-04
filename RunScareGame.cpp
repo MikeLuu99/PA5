@@ -1,5 +1,6 @@
 /*
 * Full name: Mike Luu
+* Full name: Lance Nguyen
 * Student ID: 2451334
 * Chapman email: duluu@chapman.edu
 * Course: CPSC 350 - 04
@@ -13,8 +14,8 @@
 
 RunScareGame::RunScareGame(const std::string& input, bool isDouble)
     : inputFile(input), isDoubleElimination(isDouble) {
-    // Set output file name (replace .txt with .dot)
-    outputFile = inputFile.substr(0, inputFile.find_last_of('.')) + ".dot";
+    // Set output file name to output.dot
+    outputFile = "output.dot";
     loadMonsters();
 }
 

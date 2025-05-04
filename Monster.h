@@ -1,5 +1,6 @@
 /*
 * Full name: Mike Luu
+* Full name: Lance Nguyen
 * Student ID: 2451334
 * Chapman email: duluu@chapman.edu
 * Course: CPSC 350 - 04
@@ -11,18 +12,20 @@
 
 #include <string>
 
+// Monster class represents a competitor in the scare tournament
+// Each monster has a name and scream power level that determines their strength
 class Monster {
 public:
-    std::string name;
-    int screamPowerLevel;
+    std::string name;              // Monster's identifier/name
+    int screamPowerLevel;          // Monster's power level for competition
 
-    // Constructor
-    Monster(std::string name, int power); // Initialize monster with name and power
+    // Constructor: Creates a monster with given name and power level
+    Monster(std::string name, int power);
 
-    // Comparison operators for determining winners
-    bool operator>(const Monster& other) const;
-    bool operator<(const Monster& other) const;
-    bool operator==(const Monster& other) const;
+    // Comparison operators to determine tournament winners based on scream power
+    bool operator>(const Monster& other) const;  // Returns true if this monster has higher power
+    bool operator<(const Monster& other) const;  // Returns true if this monster has lower power
+    bool operator==(const Monster& other) const; // Returns true if monsters are identical
 };
 
 #endif

@@ -1,5 +1,6 @@
 /*
 * Full name: Mike Luu
+* Full name: Lance Nguyen
 * Student ID: 2451334
 * Chapman email: duluu@chapman.edu
 * Course: CPSC 350 - 04
@@ -14,27 +15,28 @@
 #include <fstream>
 #include "TournamentNode.h"
 
+// TournamentTree implements tournament bracket logic for both single and double elimination
 template <typename T>
 class TournamentTree {
 private:
-    TournamentNode<T>* root;        // Root of the tournament tree
-    std::vector<T*> losers;         // Tracks losers for double elimination
+    TournamentNode<T>* root;        // Root node of tournament tree
+    std::vector<T*> losers;         // Tracks losing competitors for double elimination
 
-    // Helper methods
-    TournamentNode<T>* buildSingleEliminationTree(std::vector<T*>& competitors);
-    TournamentNode<T>* buildLosersBracket(std::vector<T*>& losers);
-    void saveTreeAsDotHelper(TournamentNode<T>* node, std::ofstream& file, int& nodeID) const;
+    // Helper methods for tournament operations
+    TournamentNode<T>* buildSingleEliminationTree(std::vector<T*>& competitors);  // Constructs single elimination bracket
+    TournamentNode<T>* buildLosersBracket(std::vector<T*>& losers);              // Constructs losers bracket for double elimination
+    void saveTreeAsDotHelper(TournamentNode<T>* node, std::ofstream& file, int& nodeID) const;  // Recursive helper for DOT file generation
 
 public:
     // Constructor and destructor
     TournamentTree() : root(nullptr) {}
     ~TournamentTree() { delete root; }
 
-    // Tournament methods
-    void runSingleElimination(std::vector<T*>& competitors);
-    void runDoubleElimination(std::vector<T*>& competitors);
-    void saveTreeAsDot(const std::string& filename) const;
-    T* getChampion() const { return root ? root->winner : nullptr; }
+    // Core tournament operations
+    void runSingleElimination(std::vector<T*>& competitors);    // Executes single elimination tournament
+    void runDoubleElimination(std::vector<T*>& competitors);    // Executes double elimination tournament
+    void saveTreeAsDot(const std::string& filename) const;      // Saves tournament tree visualization to DOT file
+    T* getChampion() const { return root ? root->winner : nullptr; }  // Returns tournament winner
 };
 
 // Implementation of TournamentTree methods

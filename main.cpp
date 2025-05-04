@@ -1,14 +1,16 @@
-// main.cpp
-#include <iostream>
+/*
+* Full name: Mike Luu
+* Full name: Lance Nguyen
+* Student ID: 2451334
+* Chapman email: duluu@chapman.edu
+* Course: CPSC 350 - 04
+* Assignment: Programming Assignment 5
+*/
+
 #include <string>
 #include "RunScareGame.h"
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
-        std::cerr << "Usage: " << argv[0] << " <input_file.txt> <single|double>" << std::endl;
-        return 1;
-    }
-
     std::string inputFile = argv[1];
     std::string tournamentType = argv[2];
 
