@@ -1,57 +1,77 @@
 #include "RunScareGame.h"
+#include "TournamentTree.h"  // Forward declaration is sufficient
 #include <fstream>
 #include <iostream>
-#include <sstream>
 
-RunScareGame::RunScareGame(const std::string& filename, bool isDouble) 
-    : inputFilename(filename), isDoubleElimination(isDouble), tournament(nullptr) {
-    monsters = readMonstersFromFile(filename);
+RunScareGame::RunScareGame(const std::string& input, bool isDouble)
+    : inputFile(input), isDoubleElimination(isDouble) {
+    // Set output file name (replace .txt with .dot)
+    outputFile = inputFile.substr(0, inputFile.find_last_of('.')) + ".dot";
+    loadMonsters();
 }
 
 RunScareGame::~RunScareGame() {
-    delete tournament;
-    for (auto monster : monsters) {
+    // Clean up monster objects
+    for (Monster* monster : monsters) {
         delete monster;
     }
 }
 
-std::vector<Monster<int>*> RunScareGame::readMonstersFromFile(const std::string& filename) {
-    std::vector<Monster<int>*> monsters;
-    std::ifstream file(filename);
-    
+void RunScareGame::loadMonsters() {
+    std::ifstream file(inputFile);
     if (!file.is_open()) {
-        std::cerr << "Error: Could not open file " << filename << std::endl;
-        return monsters;
+        std::cerr << "Error: Could not open input file " << inputFile << std::endl;
+        return;
     }
-    
+
     std::string line;
     while (std::getline(file, line)) {
-        std::istringstream iss(line);
-        std::string name;
-        int power;
-        
-        if (iss >> name >> power) {
-            monsters.push_back(new Monster<int>(name, power));
+        // Skip empty lines
+        if (line.empty()) continue;
+
+        // Remove trailing period if present
+        if (!line.empty() && line.back() == '.') {
+            line.pop_back();
+        }
+
+        size_t commaPos = line.find(',');
+        if (commaPos != std::string::npos) {
+            std::string name = line.substr(0, commaPos);
+            std::string powerStr = line.substr(commaPos + 1);
+
+            // Trim whitespace
+            name.erase(0, name.find_first_not_of(" \t"));
+            name.erase(name.find_last_not_of(" \t") + 1);
+            powerStr.erase(0, powerStr.find_first_not_of(" \t"));
+            powerStr.erase(powerStr.find_last_not_of(" \t") + 1);
+
+            try {
+                int power = std::stoi(powerStr);
+                monsters.push_back(new Monster(name, power));
+            } catch (const std::exception& e) {
+                std::cerr << "Error parsing power level for monster: " << name << std::endl;
+            }
         }
     }
-    
+
     file.close();
-    return monsters;
 }
 
 void RunScareGame::runTournament() {
-    if (monsters.empty()) {
-        std::cerr << "No monsters loaded from file!" << std::endl;
-        return;
-    }
-    
-    tournament = new TournamentTree<int>(monsters);
-    
+    TournamentTree<Monster> tournament;
+
     if (isDoubleElimination) {
-        tournament->doubleElimination();
-        tournament->saveTreeAsDot("double_elimination_tournament.dot");
+        tournament.runDoubleElimination(monsters);
     } else {
-        tournament->singleElimination();
-        tournament->saveTreeAsDot("single_elimination_tournament.dot");
+        tournament.runSingleElimination(monsters);
+    }
+
+    tournament.saveTreeAsDot(outputFile);
+
+    // Print tournament champion
+    Monster* champion = tournament.getChampion();
+    if (champion) {
+        std::cout << "Champion: " << champion->name
+                  << " (Power: " << champion->screamPowerLevel << ")" << std::endl;
     }
 }

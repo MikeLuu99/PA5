@@ -1,23 +1,25 @@
-#ifndef RUNSCAREGAME_H
-#define RUNSCAREGAME_H
+// RunScareGame.h
+#ifndef RUN_SCARE_GAME_H
+#define RUN_SCARE_GAME_H
 
 #include <string>
 #include <vector>
 #include "Monster.h"
-#include "TournamentTree.h"
 
 class RunScareGame {
-public:
-    RunScareGame(const std::string& filename, bool isDouble = false);
-    ~RunScareGame();
-    void runTournament();
-
 private:
-    std::vector<Monster<int>*> readMonstersFromFile(const std::string& filename);
-    std::string inputFilename;
+    std::string inputFile;
+    std::string outputFile;
     bool isDoubleElimination;
-    std::vector<Monster<int>*> monsters;
-    TournamentTree<int>* tournament;
+    std::vector<Monster*> monsters;
+
+    void loadMonsters(); // Parses input file and loads monsters
+
+public:
+    RunScareGame(const std::string& input, bool isDouble);
+    ~RunScareGame();
+
+    void runTournament();
 };
 
 #endif

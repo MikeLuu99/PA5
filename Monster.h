@@ -1,35 +1,21 @@
+// Monster.h
 #ifndef MONSTER_H
 #define MONSTER_H
 
 #include <string>
 
-template <typename T>
 class Monster {
-  public:
-    Monster(std::string name, T screamPowerLevel);
-    ~Monster();
-    //bool compareScreamPower(const Monster<T>& other) const;
-    std::string getName() const { return name; }
-    T getScreamPower() const { return screamPowerLevel; }
-
-    // Made public for DOT file generation
+public:
     std::string name;
-    T screamPowerLevel;
+    int screamPowerLevel;
 
-    // Overload >
-    bool operator>(const Monster<T>& other) const{
-      return this->screamPowerLevel > other.screamPowerLevel;
-    }
+    // Constructor
+    Monster(std::string name, int power); // Initialize monster with name and power
 
-    // Overload <
-    bool operator<(const Monster<T>& other) const{
-      return this->screamPowerLevel < other.screamPowerLevel;
-    }
-
-    // Overload ==
-    bool operator==(const Monster<T>& other) const{
-      return this->screamPowerLevel == other.screamPowerLevel;
-    }
+    // Comparison operators for determining winners
+    bool operator>(const Monster& other) const;
+    bool operator<(const Monster& other) const;
+    bool operator==(const Monster& other) const;
 };
 
 #endif
