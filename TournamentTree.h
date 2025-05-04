@@ -1,3 +1,11 @@
+/*
+* Full name: Mike Luu
+* Student ID: 2451334
+* Chapman email: duluu@chapman.edu
+* Course: CPSC 350 - 04
+* Assignment: Programming Assignment 5
+*/
+
 #ifndef TOURNAMENT_TREE_H
 #define TOURNAMENT_TREE_H
 
@@ -164,27 +172,15 @@ void TournamentTree<T>::runDoubleElimination(std::vector<T*>& competitors) {
     // Build winners bracket
     TournamentNode<T>* winnersRoot = buildSingleEliminationTree(competitors);
 
-    // Save the championship structure by duplicating it at each level
-    // This creates the leaf nodes showing the individual match-ups in expected format
-    TournamentNode<T>* champNode = new TournamentNode<T>(winnersRoot->winner);
-    champNode->left = winnersRoot;
-
     // Build losers bracket with the tracked losers
-    // Exclude the winner of winners bracket from losers
     std::vector<T*> losersCopy = losers;
     TournamentNode<T>* losersRoot = buildLosersBracket(losersCopy);
 
-    // Connect winners and losers brackets under the root
+    // Create the final championship node
     root = new TournamentNode<T>();
-    root->left = champNode;
+    root->left = winnersRoot;
     root->right = losersRoot;
-
-    // Championship is winner of winners bracket
     root->winner = winnersRoot->winner;
 }
-
-
-
-
 
 #endif

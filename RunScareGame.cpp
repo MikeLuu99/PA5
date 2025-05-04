@@ -1,3 +1,11 @@
+/*
+* Full name: Mike Luu
+* Student ID: 2451334
+* Chapman email: duluu@chapman.edu
+* Course: CPSC 350 - 04
+* Assignment: Programming Assignment 5
+*/
+
 #include "RunScareGame.h"
 #include "TournamentTree.h"  // Forward declaration is sufficient
 #include <fstream>

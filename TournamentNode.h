@@ -1,3 +1,11 @@
+/*
+* Full name: Mike Luu
+* Student ID: 2451334
+* Chapman email: duluu@chapman.edu
+* Course: CPSC 350 - 04
+* Assignment: Programming Assignment 5
+*/
+
 #ifndef TOURNAMENT_NODE_H
 #define TOURNAMENT_NODE_H
 
