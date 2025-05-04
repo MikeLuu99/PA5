@@ -8,7 +8,7 @@
 */
 
 #include "RunScareGame.h"
-#include "TournamentTree.h"  // Forward declaration is sufficient
+#include "TournamentTree.h"
 #include <fstream>
 #include <iostream>
 
