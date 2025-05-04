@@ -2,7 +2,7 @@
 - Full Name: Mike Luu
 - Full Name: Lance Nguyen
 - Student ID: 2451334
-- Chapman Email: duluu@chapman.edu
+- Chapman Email: duluu@chapman.edu lannguyen@chapman.edu
 - Course: CPSC 350 - 04
 - Assignment: Programming Assignment 5
 
